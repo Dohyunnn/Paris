@@ -74,5 +74,12 @@ public class Rq {
 	}
 
 
+	public void logout() {
+		session.removeAttribute("loginedMemberId");
+	}
+		
+	}
+
+
 	
-}
+

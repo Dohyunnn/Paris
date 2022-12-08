@@ -28,7 +28,7 @@
              <tr>
             <th>작성</th>
               <td>
-              <input type="submit" class="btn btn-active btn-lin" value="수정" />
+              <input type="submit" class="btn btn-active btn-lin" value="작성" />
               <button type="button" class="btn btn-active btn-lin" onclick="history.back();">뒤로가기</button> </td>
             </tr>
         </tbody>

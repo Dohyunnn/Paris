@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pdh.exam.demo.service.ArticleService;
+import com.pdh.exam.demo.service.BoardService;
 import com.pdh.exam.demo.utill.Ut;
 import com.pdh.exam.demo.vo.Article;
+import com.pdh.exam.demo.vo.Board;
 import com.pdh.exam.demo.vo.ResultData;
 import com.pdh.exam.demo.vo.Rq;
 
@@ -20,14 +22,23 @@ import com.pdh.exam.demo.vo.Rq;
 public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
-
+	private BoardService boardService;
+	
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+		this.articleService = articleService;
+		this.boardService = boardService;
+	}
+	
 	
 	@RequestMapping("/usr/article/list")
-	public String showList(HttpServletRequest req, Model model) {
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+		Board board = boardService.getBoardById(boardId);
 		Rq rq = (Rq)req.getAttribute("rq");
 		
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
 		
+
+		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 		
 		return "usr/article/list";

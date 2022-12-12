@@ -83,13 +83,11 @@ public class Rq {
 
 
 	public String jsHistoryBack(String msg) {
-		resp.setContentType("text/html; charset=UTF-8");
 		return Ut. jsHistoryBack(msg);
 	}
 
 
 	public String jsReplace(String msg, String uri) {
-		resp.setContentType("text/html; charset=UTF-8");
 		return Ut.jsReplace(msg,uri);	
 		}
 		

@@ -41,10 +41,12 @@ public class UsrArticleController {
 			return rq.historyBackJsOnview(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
 		}
 		
+		int articlesCount = articleService.getArticlesCount(boardId);
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId);
 		
 
 		model.addAttribute("board", board);
+		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
 		
 		return "usr/article/list";

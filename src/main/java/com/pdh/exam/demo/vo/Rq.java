@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.pdh.exam.demo.service.MemberService;
 import com.pdh.exam.demo.utill.Ut;
-
 import lombok.Getter;
+
 
 public class Rq {
 
@@ -44,10 +45,13 @@ public class Rq {
 		this.isLogined =isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+		
+	
 	}
 
 
 	public void printHistoryBackJs(String msg) {
+		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsHistoryBack(msg));
 	}
 
@@ -83,11 +87,13 @@ public class Rq {
 
 
 	public String jsHistoryBack(String msg) {
+		resp.setContentType("text/html; charset=UTF-8");
 		return Ut. jsHistoryBack(msg);
 	}
 
 
 	public String jsReplace(String msg, String uri) {
+		resp.setContentType("text/html; charset=UTF-8");
 		return Ut.jsReplace(msg,uri);	
 		}
 		

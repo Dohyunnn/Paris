@@ -1,7 +1,6 @@
 package com.pdh.exam.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +62,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doLogout(HttpServletRequest req) {
 		Rq rq = (Rq)req.getAttribute("rq");
+
 		
 		if ( !rq.isLogined()) {
 			return rq.jsHistoryBack( "이미 로그아웃 상태입니다.");
@@ -84,6 +84,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
 		Rq rq = (Rq)req.getAttribute("rq");
+
 		
 		if ( rq.isLogined() ) {
 			return rq.jsHistoryBack("이미 로그인되었습니다.");

@@ -1,9 +1,9 @@
 package com.pdh.exam.demo.vo;
 
-import java.util.List;
-
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 public class ResultData<DT> {
 	@Getter
 	private String resultCode;

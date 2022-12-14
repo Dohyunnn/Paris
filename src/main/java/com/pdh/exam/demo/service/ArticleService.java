@@ -29,7 +29,7 @@ public class ArticleService {
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 		
-		List<Article> articles = articleRepository.getForPrintArticles(boardId, limitStart, limitTake,searchKeyword, searchKeywordTypeCode);
+		List<Article> articles = articleRepository.getArticles(boardId, searchKeyword, searchKeywordTypeCode, limitStart, limitTake);
 
 		for ( Article article : articles) {
 			updateForPrintData(actorId, article);
@@ -96,5 +96,15 @@ public class ArticleService {
 
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
 		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode,searchKeyword );
+	}
+
+	public ResultData<Integer> increaseHitCount(int id) {
+		int affectedRowsCount = articleRepository.increaseHitCount(id);
+
+		if ( affectedRowsCount == 0 ) {
+			return ResultData.from("F-1", "해당 게시물이 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+
+		return ResultData.from("S-1", "조회수가 증가되었습니다.", "affectedRowsCount", affectedRowsCount);
 	}
 }

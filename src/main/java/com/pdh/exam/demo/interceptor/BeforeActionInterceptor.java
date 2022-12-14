@@ -12,12 +12,19 @@ import com.pdh.exam.demo.vo.Rq;
 
 @Component
 public class BeforeActionInterceptor implements HandlerInterceptor {
+	private Rq rq;
+
+	public BeforeActionInterceptor(Rq rq) {
+		this.rq = rq;
+	}
+	
 	@Autowired
 	private MemberService memberService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-		//이제는 Rq객체가 자동으로 만들어지기 때문
+		rq.initOnBeforeActionInterceptor();
+		
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
 }

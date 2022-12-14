@@ -104,6 +104,13 @@ public class Rq {
 		resp.setContentType("text/html; charset=UTF-8");
 		return Ut.jsReplace(msg,uri);	
 		}
+
+	// 이 메서드는 Rq 객체가 자연스럽게 생성되도록 유도하는 역할을 한다.
+		// 지우면 안되고,
+		// 편의를 위해 BeforeActionInterceptor 에서 꼭 호출을 해야한다.
+	public void initOnBeforeActionInterceptor() {
+	
+	}
 		
 	}
 

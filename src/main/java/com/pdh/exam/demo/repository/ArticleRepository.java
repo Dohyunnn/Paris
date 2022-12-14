@@ -44,10 +44,10 @@ public interface ArticleRepository {
 			</if>
 			<if test="searchKeyword != ''">
 				<choose>
-			    	<when test="searchKeywordTypeCode != 'title'">
+			    	<when test="searchKeywordTypeCode == 'title'">
 			    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
 			    	</when>
-			    	<when test="searchKeywordTypeCode != 'body'">
+			    	<when test="searchKeywordTypeCode == 'body'">
 			    		AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
 			    	</when>
 			    	<otherwise>
@@ -80,10 +80,10 @@ public interface ArticleRepository {
 			
 			<if test="searchKeyword != ''">
 				<choose>
-			    	<when test="searchKeywordTypeCode != 'title'">
+			    	<when test="searchKeywordTypeCode == 'title'">
 			    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
 			    	</when>
-			    	<when test="searchKeywordTypeCode != 'body'">
+			    	<when test="searchKeywordTypeCode == 'body'">
 			    		AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
 			    	</when>
 			    	<otherwise>

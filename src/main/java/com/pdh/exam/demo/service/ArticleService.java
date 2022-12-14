@@ -30,7 +30,7 @@ public class ArticleService {
 		 FROM article
 		 WHERE boardID = 1
 		 ORDER BY id DESC
-		 LIMIT 20, 10
+		 LIMIT 0, 10
 		 */
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;

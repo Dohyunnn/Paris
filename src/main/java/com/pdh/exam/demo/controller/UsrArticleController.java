@@ -67,7 +67,7 @@ public class UsrArticleController {
 		
 		model.addAttribute("article", article);
 		
-		boolean actorCanMackReactionPoint =  reactionPointService.actorCanMackReactionPoint(rq.getLoginedMemberId(), "article",id);
+		boolean actorCanMackReactionPoint =  reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article",id);
 		model.addAttribute("actorCanMackReactionPoint", actorCanMackReactionPoint);
 
 		

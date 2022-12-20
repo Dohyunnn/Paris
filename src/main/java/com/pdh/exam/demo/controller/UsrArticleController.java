@@ -64,6 +64,10 @@ public class UsrArticleController {
 		
 		model.addAttribute("article", article);
 		
+		boolean actorCanMackReactionPoint =  articleService.actorCanMackReactionPoint(rq.getLoginedMemberId(), id);
+		model.addAttribute("actorCanMackReactionPoint", actorCanMackReactionPoint);
+
+		
 		return "usr/article/detail";
 	}
 	

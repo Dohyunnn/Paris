@@ -34,30 +34,6 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
   })
 </script>
 
-// 댓글작성 관련
-<script>
-  let ReplyWrite__submitFormDone = false;
-  function ReplyWrite__submitForm(form) {
-    if (ReplyWrite__submitFormDone) {
-      return;
-    }
-    // 좌우공백 제거
-    form.body.value = form.body.value.trim();
-    if (form.body.value.length == 0) {
-      alert('댓글을 입력해주세요.');
-      form.body.focus();
-      return;
-    }
-    if (form.body.value.length < 2) {
-      alert('댓글을 2자 이상 입력해주세요.');
-      form.body.focus();
-      return;
-    }
-    ReplyWrite__submitFormDone = true;
-    form.submit();
-  }
-</script>
-
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
@@ -68,7 +44,9 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
         <thead>
           <tr>
             <th>번호</th>
-              <td><span class="font-bold">${article.id}</span></td>
+              <td>
+              <div class="badge ">${article.id}</div>
+            </td>
              </tr>
              <tr>
             <th>작성날짜</th>
@@ -83,16 +61,16 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
               <td>${article.extra__writerName}</td>
             </tr>
             <tr>
-            <th>조회수</th>
+            <th>조회</th>
             <td>
-              <span class="text-blue-700 article-detail__hit-count">${article.hitCount}</span>
+              <span class="badge article-detail__hit-count">${article.hitCount}</span>
             </td>
             </tr>
             <tr>
             <th>추천</th>
             <td>
             <div class="flex items-center">
-                <span class="text-blue-700">${article.goodReactionPoint}</span>
+                <span class="badge">${article.goodReactionPoint}</span>
                 <span>&nbsp;</span>
 
                   <c:if test="${actorCanMakeReaction}">
@@ -104,11 +82,11 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
                 <c:if test="${actorCanCancelGoodReaction}">
                   <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-primary"> 좋아요 👍 </a>
                   <span>&nbsp;</span>
-                  <a onclick="alert(this.title); return false;" href="#" title="먼저 좋아요를 취소해주세요." class="btn btn-xs  btn-secondary btn-outline"> 싫어요 👎 </a>
-                </c:if>
+                  <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#" class="btn btn-xs btn-secondary btn-outline"> 싫어요 👎 </a>
+                 </c:if>
                 
                 <c:if test="${actorCanCancelBadReaction}">
-                  <a onclick="alert(this.title); return false;" href="#" title="먼저 싫어요를 취소해주세요." class="btn btn-xs  btn-primary  btn-outline">좋아요 👍 </a>
+                  <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#" class="btn btn-xs btn-primary btn-outline"> 좋아요 👍 </a>
                   <span>&nbsp;</span>
                   <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-secondary"> 싫어요 👎 </a>
                 </c:if>
@@ -139,6 +117,33 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
   </div>
 </section>
 
+<script>
+  // 댓글작성 관련
+  let ReplyWrite__submitFormDone = false;
+  function ReplyWrite__submitForm(form) {
+    if (ReplyWrite__submitFormDone) {
+      return;
+    }
+    
+    // 좌우공백 제거
+    form.body.value = form.body.value.trim();
+    
+    if (form.body.value.length == 0) {
+      alert('댓글을 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+    
+    if (form.body.value.length < 2) {
+      alert('댓글내용을 2자이상 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+    
+    ReplyWrite__submitFormDone = true;
+    form.submit();
+  }
+</script>
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
@@ -173,7 +178,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
       </form>
     </c:if>
     <c:if test="${rq.notLogined}">
-      <a class="btn btn-link" href="/usr/member/login">로그인</a>후 이용해주세요.
+      <a class="link link-primary" href="/usr/member/login">로그인</a>후 이용해주세요.
     </c:if>
   </div>
 </section>
@@ -181,6 +186,40 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <h1>댓글 리스트(${repliesCount})</h1>
+    <table class="table table-fixed w-full">
+      <colgroup>
+        <col width="50" />
+        <col width="100" />
+        <col width="100" />
+        <col width="50" />
+        <col width="100" />
+        <col />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>작성날짜</th>
+          <th>수정날짜</th>
+          <th>추천</th>
+          <th>작성자</th>
+          <th>내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="reply" items="${replies}">
+          <tr class="align-top">
+            <th>${reply.id}</th>
+            <td>${reply.forPrintType1RegDate}</td>
+            <td>${reply.forPrintType1UpdateDate}</td>
+            <td>${reply.goodReactionPoint}</td>
+            <td>${reply.extra__writerName}</td>
+            <td>
+              ${reply.forPrintBody}
+            </td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
   </div>
 </section>
 <%@ include file="../common/foot.jspf" %>

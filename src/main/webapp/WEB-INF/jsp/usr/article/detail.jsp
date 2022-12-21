@@ -72,35 +72,21 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
                 <span>&nbsp;</span>
 
                   <c:if test="${actorCanMakeReaction}">
-                  <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-primary btn-outline">
-                    좋아요
-                    👍
-                  </a>
+                  <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-primary btn-outline"> 좋아요 👍  </a>
                   <span>&nbsp;</span>
-                  <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-secondary btn-outline">
-                    싫어요
-                    👎
-                  </a>
+                  <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-secondary btn-outline"> 싫어요 👎 </a>
                 </c:if>
                 
                 <c:if test="${actorCanCencelGoodReaction}">
-                  <a href="/usr/reactionPoint/doCencelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-primary">
-                    좋아요 👍
-                  </a>
+                  <a href="/usr/reactionPoint/doCencelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-primary"> 좋아요 👍 </a>
                   <span>&nbsp;</span>
-                  <a onclick="alert(this.title); return false;" href="#" title="먼저 좋아요를 취소해주세요." class="btn btn-xs  btn-secondary btn-outline">
-                    싫어요 👎
-                  </a>
+                  <a onclick="alert(this.title); return false;" href="#" title="먼저 좋아요를 취소해주세요." class="btn btn-xs  btn-secondary btn-outline"> 싫어요 👎 </a>
                 </c:if>
                 
                 <c:if test="${actorCanCencelBadReaction}">
-                  <a onclick="alert(this.title); return false;" href="#" title="먼저 싫어요를 취소해주세요." class="btn btn-xs  btn-primary  btn-outline">
-                    좋아요 👍
-                  </a>
+                  <a onclick="alert(this.title); return false;" href="#" title="먼저 싫어요를 취소해주세요." class="btn btn-xs  btn-primary  btn-outline">좋아요 👍 </a>
                   <span>&nbsp;</span>
-                  <a href="/usr/reactionPoint/doCencelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-secondary">
-                    싫어요 👎
-                  </a>
+                  <a href="/usr/reactionPoint/doCencelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs  btn-secondary"> 싫어요 👎 </a>
                 </c:if>
               </div>
             </td>
@@ -130,5 +116,43 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
 </section>
 
 
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <h1>댓글 작성</h1>
+    <c:if test="${rq.logined}">
+      <form class="table-box-type-1" method="POST" action="../reply/doWrite">
+        <input type="hidden" name="relTypeCode" value="article" />
+        <input type="hidden" name="relId" value="${article.id}" />
+        <table>
+          <colgroup>
+            <col width="200" />
+          </colgroup>
+          <tbody>
+            <tr>
+            <tr>
+              <th>작성자</th>
+              <td>${rq.loginedMember.nickname}</td>
+            </tr>
+            <tr>
+              <th>내용</th>
+              <td>
+                <textarea required="required" name="body" rows="5" placeholder="내용"></textarea>
+              </td>
+            </tr>
+             <tr>
+              <th>댓글작성</th>
+              <td>
+                <button type="submit" class="btn">댓글작성</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </c:if>
+    <c:if test="${rq.notLogined}">
+      <a class="btn btn-link" href="/usr/member/login">로그인</a>후 이용해주세요.
+    </c:if>
+  </div>
+</section>
 
 <%@ include file="../common/foot.jspf" %>

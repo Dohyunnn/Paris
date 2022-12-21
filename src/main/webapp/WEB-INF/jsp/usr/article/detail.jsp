@@ -68,7 +68,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
         <thead>
           <tr>
             <th>번호</th>
-             <td>${article.id}</td>
+              <td><span class="font-bold">${article.id}</span></td>
              </tr>
              <tr>
             <th>작성날짜</th>
@@ -153,17 +153,13 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
           </colgroup>
           <tbody>
             <tr>
-             <th>relId</th>
-             <td>${article.id}</td>
-            </tr>
-            <tr>
               <th>작성자</th>
               <td>${rq.loginedMember.nickname}</td>
             </tr>
             <tr>
               <th>내용</th>
               <td>
-                <textarea name="body" rows="5" placeholder="내용"></textarea>
+                <textarea class="w-full textarea textarea-bordered" name="body" rows="5" placeholder="내용"></textarea>
               </td>
             </tr>
              <tr>

@@ -32,7 +32,7 @@ public class UsrReactionPointController {
 		return rq.jsReplace(addGoodReactionPoint.getMsg(), replaceUri);
 	}
 
-	@RequestMapping("/usr/reactionPoint/doCencelGoodReaction")
+	@RequestMapping("/usr/reactionPoint/doCancelGoodReaction")
 	@ResponseBody
 	String doCancelGoodReaction(String relTypeCode, int relId, String replaceUri) {
 		ResultData actorCanMackReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
@@ -61,7 +61,7 @@ public class UsrReactionPointController {
 		return rq.jsReplace(addBadReactionPoint.getMsg(), replaceUri);
 	}
 
-	@RequestMapping("/usr/reactionPoint/doCencelBadReaction")
+	@RequestMapping("/usr/reactionPoint/doCacelBadReaction")
 	@ResponseBody
 	String doCancelBadReaction(String relTypeCode, int relId, String replaceUri) {
 		ResultData actorCanMackReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);

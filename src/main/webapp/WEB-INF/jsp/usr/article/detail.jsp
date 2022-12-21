@@ -34,6 +34,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
   })
 </script>
 
+// 댓글작성 관련
 <script>
   let ReplyWrite__submitFormDone = false;
   function ReplyWrite__submitForm(form) {
@@ -152,6 +153,9 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
           </colgroup>
           <tbody>
             <tr>
+             <th>relId</th>
+             <td>${article.id}</td>
+            </tr>
             <tr>
               <th>작성자</th>
               <td>${rq.loginedMember.nickname}</td>
@@ -178,4 +182,9 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
   </div>
 </section>
 
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <h1>댓글 리스트(${repliesCount})</h1>
+  </div>
+</section>
 <%@ include file="../common/foot.jspf" %>

@@ -193,6 +193,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
         <col width="100" />
         <col width="50" />
         <col width="100" />
+        <col width="150" />
         <col />
       </colgroup>
       <thead>
@@ -202,6 +203,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
           <th>수정날짜</th>
           <th>추천</th>
           <th>작성자</th>
+          <th>비고</th>
           <th>내용</th>
         </tr>
       </thead>
@@ -214,8 +216,14 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
             <td>${reply.goodReactionPoint}</td>
             <td>${reply.extra__writerName}</td>
             <td>
-              ${reply.forPrintBody}
+             <c:if test="${reply.extra__actorCanModify}">
+                <a class="btn btn-link" href="../reply/modify?id=${reply.id}"> 수정</a>
+              </c:if>
+              <c:if test="${reply.extra__actorCanDelete}">
+                <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="../reply/doDelete?id=${reply.id}">삭제</a>
+              </c:if>
             </td>
+            <td>${reply.forPrintBody}</td>
           </tr>
         </c:forEach>
       </tbody>

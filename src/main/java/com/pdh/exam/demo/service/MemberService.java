@@ -10,8 +10,10 @@ import com.pdh.exam.demo.vo.ResultData;
 @Service
 public class MemberService {
 	private MemberRepository memberRepository;
-
-	public MemberService(MemberRepository memberRepository) {
+	private AttrService attrService;
+	
+	public MemberService(AttrService attrService, MemberRepository memberRepository) {
+		this.attrService = attrService;
 		this.memberRepository = memberRepository;
 	}
 
@@ -54,4 +56,12 @@ public class MemberService {
 
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
 	}
+
+	public String genMemberModifyAuthKey(int actorId) {
+		String memberModifyAuthKey = Ut.getTempPassword(10);
+
+		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey, Ut.getDateStrLater(60 * 5));
+		return memberModifyAuthKey;
+	}
+
 }

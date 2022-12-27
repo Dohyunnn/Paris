@@ -30,6 +30,16 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.excludePathPatterns("/error");
 
 		ir = registry.addInterceptor(needLoginInterceptor);
+		ir.addPathPatterns("/usr/member/myPage");
+		ir.addPathPatterns("/usr/member/checkPassword");
+		ir.addPathPatterns("/usr/member/doCheckPassword");
+		ir.addPathPatterns("/usr/member/modify");
+		ir.addPathPatterns("/usr/member/doModify");
+		ir.addPathPatterns("/usr/reply/modify");
+		ir.addPathPatterns("/usr/reply/doModify");
+		ir.addPathPatterns("/usr/reply/doDelete");
+		ir.addPathPatterns("/usr/reply/write");
+		ir.addPathPatterns("/usr/reply/doWrite");
 		ir.addPathPatterns("/usr/article/write");
 		ir.addPathPatterns("/usr/article/doWrite");
 		ir.addPathPatterns("/usr/article/modify");
@@ -37,6 +47,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.addPathPatterns("/usr/article/doDelete");
 		ir.addPathPatterns("/usr/reactionPoint/doGoodReaction");
 		ir.addPathPatterns("/usr/reactionPoint/doBadReaction");
+		ir.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction");
+		ir.addPathPatterns("/usr/reactionPoint/doCancelBadReaction");
 	}
 
 

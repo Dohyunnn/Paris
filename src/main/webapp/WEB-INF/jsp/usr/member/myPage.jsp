@@ -34,7 +34,7 @@
             <td>${rq.loginedMember.nickname}</td>
           </tr>
           <tr>
-            <th>휴대폰</th>
+            <th>전화번호</th>
             <td>${rq.loginedMember.cellphoneNo}</td>
           </tr>
           <tr>

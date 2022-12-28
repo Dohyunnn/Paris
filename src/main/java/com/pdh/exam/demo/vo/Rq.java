@@ -16,7 +16,6 @@ import com.pdh.exam.demo.utill.Ut;
 
 import lombok.Getter;
 
-
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -32,7 +31,6 @@ public class Rq {
 	private HttpServletResponse  resp;
 	private HttpSession session;
 	private Map<String, String> paramMap;
-	
 	
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req=req;
@@ -77,21 +75,17 @@ public class Rq {
 		return !isLogined;
 	}
 
-	
 	public void println(String str) {
 		print(str + "\n");
 	}
-
 
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
 	}
 
-
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
 	}
-
 
 	public String historyBackJsOnview(String msg) {
 		req.setAttribute("msg", msg);
@@ -99,19 +93,16 @@ public class Rq {
 		return "common/js";
 	}
 
-
 	public String jsHistoryBack(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
 		return Ut. jsHistoryBack(msg);
 	}
-
 
 	public String jsReplace(String msg, String uri) {
 		resp.setContentType("text/html; charset=UTF-8");
 		return Ut.jsReplace(msg,uri);	
 		}
 	
-
 	public String getCurrentUri() {
 		String currentUri = req.getRequestURI();
         String queryString = req.getQueryString();
@@ -141,13 +132,11 @@ public class Rq {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsReplace(msg, uri));
 	}
-
     
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
 	}
 
-	
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();
 
@@ -156,7 +145,7 @@ public class Rq {
 		case "/usr/member/join":
 		case "/usr/member/findLoginId":
 		case "/usr/member/findLoginPw":
-			return Ut.getUriEncoded(paramMap.get("afterLoginUri"));
+			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
 		}
 
 		return getEncodedCurrentUri();

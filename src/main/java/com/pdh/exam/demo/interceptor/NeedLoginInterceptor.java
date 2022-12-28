@@ -23,6 +23,6 @@ public class NeedLoginInterceptor implements HandlerInterceptor {
 			rq.printReplaceJs("로그인 후 이용해주세요.", "../member/login?afterLoginUri=" + afterLoginUri);
 		}
 		
-		return HandlerInterceptor.super.preHandle(req, resp, handler);
+		return false;
 	}
 }

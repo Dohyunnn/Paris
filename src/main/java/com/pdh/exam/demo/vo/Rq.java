@@ -86,6 +86,17 @@ public class Rq {
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
 	}
+	
+	public String historyBackJsOnView(String resultCode, String msg) {
+		req.setAttribute("msg", String.format("[%s] %s", resultCode, msg));
+		req.setAttribute("historyBack", true);
+		return "common/js";
+	}
+
+	public String jsHistoryBack(String resultCode, String msg) {
+		msg = String.format("[%s] %s", resultCode, msg);
+		return Ut.jsHistoryBack(msg);
+	}
 
 	public String historyBackJsOnview(String msg) {
 		req.setAttribute("msg", msg);
@@ -121,6 +132,10 @@ public class Rq {
 	public void printReplaceJs(String msg, String uri) {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsReplace(msg, uri));
+	}
+	
+	public String getJoinUri() {	
+		return "../member/join?afterLogoutUri=" + getAfterLogoutUri();
 	}
     
 	public String getLoginUri() {

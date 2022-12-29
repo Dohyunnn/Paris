@@ -8,8 +8,9 @@
   let ArticleModify__submitDone = false;
   function ArticleModify__submit(form) {
     if (ArticleModify__submitDone) {
-      return;
-    }
+    	alert('처리중입니다.');
+		return;
+	}
     const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
     const markdown = editor.getMarkdown().trim();
     

@@ -6,6 +6,7 @@
 
 <script>
 	let submitJoinFormDone = false;
+	let validLogind = "";
 	function submitJoinForm(form) {
 		if (submitJoinFormDone) {
 			alert('처리중입니다.');
@@ -19,6 +20,12 @@
 			return;
 		}
 		
+		if (form.loginId.value != validLogind) {
+			alert('해당 로그인아이디는 올바르지 않습니다. 다른 로그인아이디를 입력해주세요.');
+			form.loginId.focus();
+			return;
+		}
+
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPw.value.length == 0) {
 			alert('비밀번호를 입력해주세요.');
@@ -63,6 +70,29 @@
 		submitJoinFormDone = true;
 		form.submit();
 	}
+	
+	function checkLoginIdDup(el) {
+		$('.loginId-message').empty();
+		const form = $(el).closest('form').get(0);
+		
+		if (form.loginId.value == 0) {
+			validLogind = '';
+			return;
+		}
+		
+		$.get( '../member/getLoginIdDup', {
+	      isAjax: 'Y',
+		  loginId: form.loginId.value,
+		}, function(data) {
+		  $('.loginId-message').html('<div class="mt-2">'+ data.msg +'</div>');
+		  if (data.success) {
+			  validLogind = data.data1;
+		  } else {
+			  validLogind = '';
+		  }
+		}, 'json');
+		
+	}
 </script>
 
 <section class="mt-5">
@@ -78,7 +108,8 @@
             <tr>
               <th>로그인아이디</th>
               <td>
-                <input class="input input-bordered" name="loginId" placeholder="로그인아이디" type="text" />
+            <input class="input input-bordered" name="loginId" placeholder="로그인아이디" type="text" onkeyup="checkLoginIdDup(this);" autocomplete="off"/>
+                <div class="loginId-message"></div>
               </td>
             </tr>
             <tr>
@@ -102,7 +133,7 @@
             <tr>
               <th>닉네임</th>
               <td>
-                <input class="input input-bordered" name="nickname" placeholder="닉네임" type="text"/>
+                <input class="input input-bordered" name="nickname" placeholder="닉네임" type="text" />
               </td>
             </tr>
             <tr>

@@ -115,7 +115,7 @@ public class UsrMemberController {
 			return rq.jsHistoryBack( "존재하지 않은 로그인아이디 입니다.");
 		}
 		
-		if ( member.getLoginPw().equals(loginPw) == false ) {
+		if ( member.getLoginPw().equals(Ut.sha256(loginPw)) == false ) {
 			return rq.jsHistoryBack( "비밀번호가 일치하지 않습니다.");
 		}
 		

@@ -118,7 +118,16 @@ public class UsrMemberController {
 		
 		rq.login(member);
 		
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), afterLoginUri);	
+		String msg = Ut.f("%s님 환영합니다.", member.getNickname());
+
+		boolean isUsingTempPassword = memberService.isUsingTempPassword(member.getId());
+
+		if ( isUsingTempPassword ) {
+			msg = "임시 비밀번호를 변경해주세요.";
+			afterLoginUri = "/usr/member/myPage";
+		}
+
+		return rq.jsReplace(msg, afterLoginUri);
 	}
 	
 	@RequestMapping("/usr/member/findLoginId")

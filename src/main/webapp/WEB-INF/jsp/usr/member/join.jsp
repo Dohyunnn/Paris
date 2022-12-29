@@ -4,6 +4,8 @@
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../common/head.jspf"%>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
 <script>
 	let submitJoinFormDone = false;
 	let validLogind = "";
@@ -107,7 +109,7 @@
  	}
  	
  	const checkLoginDupDebounced = _.debounce(checkLoginDup, 300);
-	}
+	
 </script>
 
 <section class="mt-5">
@@ -115,7 +117,7 @@
     <div class="table-box-type-1">
       <form class="table-box-type-1" method="POST" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
         <input type="hidden" name="afterJoinUri" value="${param.afterJoinUri}"/>
-        <table>
+             <table>
           <colgroup>
             <col width="200" />
           </colgroup>
@@ -123,8 +125,8 @@
             <tr>
               <th>로그인아이디</th>
               <td>
-            <input class="input input-bordered" name="loginId" placeholder="로그인아이디" type="text" onkeyup="checkLoginDupDebounced(this);" autocomplete="off"/>   
-                <div class="loginId-message"></div>
+                <input class="input input-bordered" name="loginId" placeholder="로그인아이디" type="text" onkeyup="checkLoginDupDebounced(this);" autocomplete="off"/>
+                <div class="massage-msg"></div>
               </td>
             </tr>
             <tr>
@@ -154,13 +156,13 @@
             <tr>
               <th>이메일</th>
               <td>
-                <input class="input input-bordered" name="email" placeholder="이메일" type="text"/>
+                <input class="input input-bordered" name="email" placeholder="이메일" type="text" />
               </td>
             </tr>
             <tr>
               <th>휴대전화번호</th>
               <td>
-                <input class="input input-bordered" name="cellphoneNo" placeholder="휴대전화번호" type="text"/>
+                <input class="input input-bordered" name="cellphoneNo" placeholder="휴대전화번호" type="text" />
               </td>
             </tr>
             <tr>

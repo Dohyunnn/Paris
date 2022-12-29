@@ -32,6 +32,13 @@
               <button type="button" class="btn btn-active btn-lin">뒤로가기</button>
               </td>
             </tr>
+            <tr>
+            <th>비고</th>
+            <td>
+              <a href="${rq.findLoginIdUri}" type="submit" class="btn btn-link">아이디 찾기</a>
+              <a href="${rq.findLoginPwUri}" type="submit" class="btn btn-link">비밀번호 찾기</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </form>

@@ -56,8 +56,8 @@ loginPw = 'admin',
 authLevel = 7,
 `name` = "관리자",
 nickname = "관리자",
-cellphoneNo = "01011112222",
-email = "amdin@gmail.com";
+cellphoneNo = "01012340000",
+email = "admin@gmail.com";
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -66,8 +66,8 @@ loginId = 'user1',
 loginPw = 'user1',
 `name` = "사용자1",
 nickname = "사용자1",
-cellphoneNo = "01011112222",
-email = "test1@gmail.com";
+cellphoneNo = "01012340001",
+email = "user1@gmail.com";
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -76,8 +76,8 @@ loginId = 'user2',
 loginPw = 'user2',
 `name` = "사용자2",
 nickname = "사용자2",
-cellphoneNo = "01011112222",
-email = "test2@gmail.com";
+cellphoneNo = "01012340002",
+email = "user2@gmail.com";
 
 #게시물 테이블에 회원정보 추가
 ALTER TABLE article ADD COLUMN memberID INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
@@ -112,7 +112,7 @@ updateDate = NOW(),
 `code` = 'free1',
 `name` = '자유';
 
-SELECT * FROM board
+SELECT * FROM board;
 
 # 게시판 테이블에 boardId 컬럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;

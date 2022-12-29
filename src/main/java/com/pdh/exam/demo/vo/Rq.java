@@ -146,6 +146,25 @@ public class Rq {
 		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
 	}
 
+	public String getFindLoginIdUri() {	
+		return "../member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+	}
+
+	public String getFindLoginPwUri() {	
+		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+	}
+
+	public String getAfterFindLoginIdUri() {
+		String requestUri = req.getRequestURI();
+
+		return getEncodedCurrentUri();
+	}
+
+	public String getAfterFindLoginPwUri() {
+		String requestUri = req.getRequestURI();
+
+		return getEncodedCurrentUri();
+	}
 	
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();

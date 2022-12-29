@@ -1,11 +1,22 @@
 server:
    port: 8080
 spring:
- mvc:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: qkrehgusqkrehgus@gmail.com
+    password: ruxthpkczvcnzpwz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  mvc:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
- datasource:
+  datasource:
      # driver-class-name: com.mysql.cj.jdbc.Driver
      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/Project_Paris?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
@@ -14,6 +25,10 @@ spring:
 mybatis:
     type-aliases-package: com.pdh.exam.demo.vo
 custom:
+  siteName: Paris
+  siteMainUri: http://localhost:8080
+  emailFrom: no-reply@localhost
+  emailFromName: Paris 커뮤니티
   logging:
     dir: log
     level: debug 

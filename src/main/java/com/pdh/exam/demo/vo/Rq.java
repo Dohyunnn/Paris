@@ -155,14 +155,10 @@ public class Rq {
 	}
 
 	public String getAfterFindLoginIdUri() {
-		String requestUri = req.getRequestURI();
-
 		return getEncodedCurrentUri();
 	}
 
 	public String getAfterFindLoginPwUri() {
-		String requestUri = req.getRequestURI();
-
 		return getEncodedCurrentUri();
 	}
 	

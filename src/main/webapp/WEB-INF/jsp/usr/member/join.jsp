@@ -71,45 +71,42 @@
 		form.submit();
 	}
 	
-	var checkLoginIdDup = _.debounce(function(form) {
-		<!-- $massage.empty().append('<div class="mt-2"> 아이디를 입력해주세요. </div>'); -->
+	function checkLoginDup(el) {
+		const form = $(el).closest('form').get(0);
 		
-		$.get( '../member/getLoginIdDup', {
-	      isAjax: 'Y',
-		  loginId: form.loginId.value,
-		}, function(data) {
-			 var $massage = $(form.loginId).next();
-				
-   		  if ( data.resultCode.substr(0, 2) == 'S-') {
-   			  $massage.empty().append('<div class="mt-2 text-green-500">'+ data.msg +'</div>');
-   			  validLogind = data.body.loginId;
-   		  } else {
-   			  $massage.empty().append('<div class="mt-2 text-red-500">'+ data.msg +'</div>');
-   			  validLogind = '';
-   		  }
-   			
-   		  if (data.success) {
-			  	validLogind = data.data1;
-		  	  } else {
-			  	validLogind = '';
-		  	}
-		}, 'json');
-		
-      }, 1000);
+		if ( form.loginId.value.length == 0 ) {
+			validLogind = '';
+			return;
+		}	
 	
-	
-	  function JoinForm_checkLoginIdDup(input) {
-		 var form = input.form;
-		 form.loginId.value = form.loginId.value.trim();
-		
-		 var $massage = $(form.loginId).next();
-		
-		 if ( form.loginId.value.length == 0 ) {
-		 	$massage.empty();
+		if ( validLogind == form.loginId.value ) {
 			return;
 		}
+		$.get( '../member/getLoginIdDup', {
+			  isAjax: 'Y',
+			  loginId: form.loginId.value
+		 	}, function(data) {
 		
-		checkLoginIdDup(form);	
+		var $massage = $(form.loginId).next();
+		
+		if ( data.resultCode.substr(0, 2) == 'S-') {
+    		$massage.empty().append('<div class="mt-2 text-green-500">'+ data.msg +'</div>');
+    		validLogind = data.data1;
+    	} else {
+    		$massage.empty().append('<div class="mt-2 text-red-500">'+ data.msg +'</div>');
+    		validLogind = '';
+    	}
+    			
+    	if (data.success) {
+		  	validLogind = data.data1;
+		} else {
+		  	validLogind = '';
+		}
+		
+		 	  }, 'json');
+ 	}
+ 	
+ 	const checkLoginDupDebounced = _.debounce(checkLoginDup, 300);
 	}
 </script>
 
@@ -126,8 +123,8 @@
             <tr>
               <th>로그인아이디</th>
               <td>
-            <input class="input input-bordered" name="loginId" placeholder="로그인아이디" type="text" onkeyup="JoinForm_checkLoginIdDup(this);" autocomplete="off"/>
-                <div class="massage-msg"></div>
+            <input class="input input-bordered" name="loginId" placeholder="로그인아이디" type="text" onkeyup="checkLoginDupDebounced(this);" autocomplete="off"/>   
+                <div class="loginId-message"></div>
               </td>
             </tr>
             <tr>

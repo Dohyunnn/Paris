@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>${pageTitle}</title>
 
+<!-- 로그인 비밀번호 암호화 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

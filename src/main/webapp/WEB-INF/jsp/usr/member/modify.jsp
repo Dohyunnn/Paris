@@ -52,6 +52,12 @@
 			return;
 		}
 		
+const deleteProfileImgFileInput = form["deleteFile__member__0__extra__profileImg__1"];
+		
+		if ( deleteProfileImgFileInput.checked ) {
+			form["file__member__0__extra__profileImg__1"].vlaue = '';
+		}
+		
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
 		
@@ -119,8 +125,7 @@
               <tr>
               <th>프로필 이미지</th>
               <td>
-                  <img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.removeProfileImgIfNotExitOnErrorHtmlAttr}"/>
-
+                 <img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.removeProfileImgIfNotExitOnErrorHtmlAttr}"/>
                 <div class="mt-2">
                   <label class="cursor-pointer inline-flex">
                     <span class="label-text mr-2 mt-1">이미지 삭제</span>

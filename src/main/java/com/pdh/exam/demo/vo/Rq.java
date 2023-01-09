@@ -195,13 +195,20 @@ public class Rq {
 		return "../article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
 	}
 
+
+	public String getProfileImgUri(int memberId) {
+		return "/common/genFile/file/member/" + memberId + "/extra/profileImg/1";
 	}
 
-
 	
-		
+	public String getProfileFallbackImgUri() {
+		return "https://via.placeholder.com/300/?text=*^_^*";
+	}
 
-
+	public String getProfileFallbackImgOnErrorHtml() {
+		return "this.src = '" + getProfileFallbackImgUri() + "'";
+	}
+}
 
 	
 

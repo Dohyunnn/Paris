@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.pdh.exam.demo.service.GenFileService;
 import com.pdh.exam.demo.service.MemberService;
 import com.pdh.exam.demo.utill.Ut;
+import com.pdh.exam.demo.vo.Article;
 import com.pdh.exam.demo.vo.Member;
 import com.pdh.exam.demo.vo.ResultData;
 import com.pdh.exam.demo.vo.Rq;

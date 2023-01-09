@@ -14,6 +14,10 @@
         </colgroup>
         <tbody>
           <tr>
+            <th>프로필이미지</th>
+            <td><img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" /></td>
+          </tr>
+          <tr>
             <th>로그인아이디</th>
             <td>${rq.loginedMember.loginId}</td>
           </tr>

@@ -70,7 +70,7 @@
 			return;
 		}
 		
-		const maxSizeMb = 0;
+		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
 		
 		const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
@@ -171,7 +171,7 @@
             <tr>
             <th>프로필 이미지</th>
               <td>
-              <input name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요" type="file" />
+             <input accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요" type="file" />
               </td>
             </tr>
             <tr>

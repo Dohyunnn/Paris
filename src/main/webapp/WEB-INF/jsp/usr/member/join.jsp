@@ -115,7 +115,7 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
-      <form class="table-box-type-1" method="POST" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
+       <form class="table-box-type-1" method="POST" enctype="multipart/form-data" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
         <input type="hidden" name="afterJoinUri" value="${param.afterJoinUri}"/>
              <table>
           <colgroup>
@@ -151,6 +151,12 @@
               <th>닉네임</th>
               <td>
                 <input class="input input-bordered" name="nickname" placeholder="닉네임" type="text" />
+              </td>
+            </tr>
+            <tr>
+            <th>프로필 이미지</th>
+              <td>
+              <input name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요" type="file" />
               </td>
             </tr>
             <tr>

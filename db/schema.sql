@@ -112,8 +112,6 @@ updateDate = NOW(),
 `code` = 'free1',
 `name` = '자유';
 
-SELECT * FROM board;
-
 # 게시판 테이블에 boardId 컬럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
 
@@ -148,7 +146,6 @@ ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 DESC article;
 
-SELECT * FROM article;
 
 # 리액션포인트 테이블
 CREATE TABLE reactionPoint (
@@ -281,8 +278,6 @@ relTypeCode = 'article',
 relId = 2,
 `body` = '댓글 4';
 
-SELECT * FROM reply;
-
 SELECT R.*,
 M.nickname AS extra__writerName
 FROM reply AS R
@@ -290,7 +285,7 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 WHERE R.relTypeCode = 'article'
 AND R.relId = 2
-ORDER BY R.id DESC
+ORDER BY R.id DESC;
 
 # 댓글 좋아요 수, 싫어요 수 칼럼 추가
 ALTER TABLE reply
@@ -300,9 +295,7 @@ ALTER TABLE reply
 ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 댓글 테이블에 인덱스 걸기
-ALTER TABLE `reply` ADD INDEX (`relTypeCode`, `relId`);
-
-SELECT * FROM MEMBER
+ALTER TABLE `reply` ADD INDEX (`relTypeCode`, `relId`)
 
 # 부가정보테이블
 # 댓글 테이블 추가
@@ -333,7 +326,21 @@ ALTER TABLE `member` MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
 
 # 기존 회원의 비밀번호를 함호화 해서 저장
 UPDATE `member`
-SET loginPw = SHA2(loginPw, 256);
+SET loginPw = SHA2(loginPw, 256)
+WHERE loginId = 'user3';
 
 
 SELECT * FROM MEMBER;
+
+#회원 대량 생성
+INSERT INTO `member`
+SET regdate = NOW(),
+updatedate = NOW(),
+loginId = 'user3',
+loginPw = 'user3',
+authLevel = 3,
+`name` = '사용자3',
+`nickname` = '사용자3',
+cellphoneNo = '01011112222',
+email = 'user3@gamil.com';
+

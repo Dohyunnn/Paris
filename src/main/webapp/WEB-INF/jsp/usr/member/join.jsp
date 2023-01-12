@@ -124,6 +124,9 @@
 		  	validLogind = '';
 		}
 		
+    	if ( data.resultCode == 'F-B') {
+    		alert(data.msg);
+    	}
 		 	  }, 'json');
  	}
  	

@@ -1,5 +1,7 @@
 package com.pdh.exam.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -111,6 +113,21 @@ public class MemberService {
 
 	public boolean isUsingTempPassword(int actorId) {
 		return attrService.getValue("member", actorId, "extra", "useTempPassword").equals("1");
+	}
+
+	public int getMembersCount(int authLevel, String searchKeywordTypeCode, String searchKeyword) {
+		return memberRepository.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Member> getForPrintMembers(int authLevel, String searchKeyword, String searchKeywordTypeCode,
+			int itemsCountInAPage, int page) {
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeyword, searchKeywordTypeCode,
+				limitStart, limitTake);
+
+		return members;
 	}
 	
 }

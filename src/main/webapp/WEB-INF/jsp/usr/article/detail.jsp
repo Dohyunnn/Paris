@@ -198,6 +198,38 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
   </div>
 </section>
 
+<script>
+function ReplyLIst_deleteReply(btn) {
+  const $clicked = $(btn);
+  const $target = $clicked.closest('[data-id]');
+  const id = $target.attr('data-id');
+  
+  $clicked.text('삭제중...');
+  
+  $.post(
+    '../reply/doDeleteAjax',
+    {
+      id: id
+    },
+    function(data) {
+      
+      if ( data.success ) {
+        $target.remove();
+      }
+      else {
+        if (data.msg) {
+          alert(data.msg);
+        }
+        
+        $clicked.text('삭제실패ㅜㅜ');
+      }
+      
+    },
+    'json'
+  );
+}
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <h1>댓글 리스트(${repliesCount})</h1>
@@ -224,7 +256,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
       </thead>
       <tbody>
         <c:forEach var="reply" items="${replies}">
-          <tr class="align-top">
+         <tr data-id="${reply.id}" class="align-top">
             <th>${reply.id}</th>
             <td>${reply.forPrintType1RegDate}</td>
             <td>${reply.forPrintType1UpdateDate}</td>
@@ -235,7 +267,7 @@ const localStorageKey = 'article__'+ params.id + '__viewDone';
             <a class="btn btn-link" href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}"> 수정</a>
               </c:if>
               <c:if test="${reply.extra__actorCanDelete}">
-             <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;" href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+             <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') )  { ReplyLIst_deleteReply(this); } return false;">삭제</a>
               </c:if>
             </td>
             <td>${reply.forPrintBody}</td>
